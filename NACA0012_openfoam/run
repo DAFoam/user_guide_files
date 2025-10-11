@@ -1,0 +1,28 @@
+#!/bin/sh
+source $WM_PROJECT_DIR/etc/bashrc                   # source OpenFOAM
+cd "${0%/*}" || exit                                # run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions        # tutorial run functions
+#------------------------------------------------------------------------------
+
+# whether to run job in parallel or not
+parallel=true
+
+# copy initial field/BCs
+cp -r 0.orig 0
+
+# run simulation
+if [ "$parallel" = true ]
+then
+
+    runApplication decomposePar
+    runParallel $(getApplication)
+    runApplication reconstructPar 
+    rm -rf processor*
+
+else
+
+    runApplication $(getApplication)
+
+fi
+
+#------------------------------------------------------------------------------

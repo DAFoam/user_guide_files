@@ -1,0 +1,49 @@
+/*--------------------------------*- C++ -*---------------------------------*\ 
+| ========                 |                                                 | 
+| \      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           | 
+|  \    /   O peration     | Version:  v1812                                 | 
+|   \  /    A nd           | Web:      www.OpenFOAM.com                      | 
+|    \/     M anipulation  |                                                 | 
+\*--------------------------------------------------------------------------*/ 
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      decomposeParDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// number of processor cores to use (1 subdomain per core)
+numberOfSubdomains  8;
+
+// decomposition methods to use:
+//      
+//      scotch
+//      hierarchical
+//      simple
+//      ptscotch
+//      metis
+//      kahip
+//      manual
+method              scotch;
+
+
+// how to split the domain -> n (Px Py Pz)
+//        
+//      n  = how to split domain in each direction
+//      Px = number of divisions in the x direction
+//      Py = number of divisions in the y direction
+//      Pz = number of divisions in the z direction
+//
+// Px, Py, Pz must satisfy: Px * Py * Pz = numberOfSubdomains
+// NOTE: This is not needed for scotch, so OpenFOAM will just ignore this entry.
+//       This is only here for demonstration. Other methods, such as hierarchical, will
+//       need this coeffs dictionary.
+coeffs
+{
+    n               (4 2 1);
+}
+
+// ************************************************************************* //
