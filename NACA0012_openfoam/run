@@ -10,7 +10,7 @@ parallel=true
 # copy initial field/BCs
 cp -r 0.orig 0
 
-# run sim
+# run simulation
 if [ "$parallel" = true ]
 then
 

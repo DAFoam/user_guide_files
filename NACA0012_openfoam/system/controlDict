@@ -23,35 +23,34 @@ deltaT              1;
 writeControl        timeStep;
 writeInterval       1000;
 purgeWrite          0;
-writeFormat         binary;
+writeFormat         ascii;
 writePrecision      8;
 writeCompression    on;
 timeFormat          general;
 timePrecision       8;
-runTimeModifiable   true;
 
 functions
 {
-    Fields_minmax
+    aeroForces
     {
-        type              fieldMinMax;
-        libs              ("libfieldFunctionObjects.so");
-        fields            (U p);
-        mode              magnitude;
-        log               true;
-        writeControl      timeStep;
-        writeInterval     1000;
-        write             no;
-    }
-
-    yPlus
-    {
-        type              yPlus;
-        libs              ("libfieldFunctionObjects.so");
-        patches           (wing);
-        writeControl      timeStep;
-        writeInterval     1000;
-        log               true;
-        write             no;
+        type            forceCoeffs;
+        libs            ("libforces.so");
+        patches         (wing);
+        p               p;
+        U               U;
+        rho             rhoInf;
+        rhoInf          1.225;
+        pRef            0;
+        porosity        no;
+        liftDir         (0 1 0);
+        dragDir         (-1 0 0);
+        pitchAxis       (0 0 1);
+        CofR            (0.025 0 0);
+        magUInf         10;
+        lRef            0.1;
+        Aref            0.1;
+        log             true;
+        writeControl    timeStep;
+        writeInterval   1000;
     }
 }

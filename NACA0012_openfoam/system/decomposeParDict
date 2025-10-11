@@ -39,11 +39,11 @@ method              scotch;
 //
 // Px, Py, Pz must satisfy: Px * Py * Pz = numberOfSubdomains
 // NOTE: This is not needed for scotch, so OpenFOAM will just ignore this entry.
-//       This is only for demonstration
+//       This is only here for demonstration. Other methods, such as hierarchical, will
+//       need this coeffs dictionary.
 coeffs
 {
     n               (4 2 1);
 }
-
 
 // ************************************************************************* //
