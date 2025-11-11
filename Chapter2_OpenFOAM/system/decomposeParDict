@@ -16,7 +16,7 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 // number of processor cores to use (1 subdomain per core)
-numberOfSubdomains  8;
+numberOfSubdomains  4;
 
 // decomposition methods to use:
 //      
