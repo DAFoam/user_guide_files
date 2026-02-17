@@ -1,0 +1,27 @@
+#!/bin/sh
+cd ${0%/*} || exit 1                        # Run from this directory
+. $WM_PROJECT_DIR/bin/tools/RunFunctions    # Tutorial run functions
+#------------------------------------------------------------------------------
+
+# generate mesh
+runApplication blockMesh
+
+# whether to run job in parallel or not
+parallel=true
+
+# run simulation
+if [ "$parallel" = true ]
+then
+
+    runApplication decomposePar
+    runParallel $(getApplication)
+    runApplication reconstructPar 
+    rm -rf processor*
+
+else
+
+    runApplication $(getApplication)
+
+fi
+
+#------------------------------------------------------------------------------
